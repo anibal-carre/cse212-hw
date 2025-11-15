@@ -16,6 +16,13 @@
 /// </summary>
 public class Maze
 {
+
+    // TODO Problem 4:
+    // Use the maze dictionary to check if movement is allowed.
+    // Each cell has 4 booleans: [left, right, up, down].
+    // If the move is allowed, update the x or y position.
+    // If not allowed, throw InvalidOperationException.
+
     private readonly Dictionary<ValueTuple<int, int>, bool[]> _mazeMap;
     private int _currX = 1;
     private int _currY = 1;
@@ -25,14 +32,21 @@ public class Maze
         _mazeMap = mazeMap;
     }
 
-    // TODO Problem 4 - ADD YOUR CODE HERE
+
+    private bool[] CurrentCell => _mazeMap[(_currX, _currY)];
     /// <summary>
     /// Check to see if you can move left.  If you can, then move.  If you
     /// can't move, throw an InvalidOperationException with the message "Can't go that way!".
     /// </summary>
+    /// 
+    /// 
     public void MoveLeft()
     {
-        // FILL IN CODE
+        bool canMove = CurrentCell[0];
+        if (!canMove)
+            throw new InvalidOperationException("Cannot move left");
+
+        _currX--;
     }
 
     /// <summary>
@@ -41,7 +55,11 @@ public class Maze
     /// </summary>
     public void MoveRight()
     {
-        // FILL IN CODE
+        bool canMove = CurrentCell[1];
+        if (!canMove)
+            throw new InvalidOperationException("Cannot move right");
+
+        _currX++;
     }
 
     /// <summary>
@@ -50,7 +68,11 @@ public class Maze
     /// </summary>
     public void MoveUp()
     {
-        // FILL IN CODE
+        bool canMove = CurrentCell[2];
+        if (!canMove)
+            throw new InvalidOperationException("Cannot move up");
+
+        _currY--;
     }
 
     /// <summary>
@@ -59,7 +81,11 @@ public class Maze
     /// </summary>
     public void MoveDown()
     {
-        // FILL IN CODE
+        bool canMove = CurrentCell[3];
+        if (!canMove)
+            throw new InvalidOperationException("Cannot move down");
+
+        _currY++;
     }
 
     public string GetStatus()
